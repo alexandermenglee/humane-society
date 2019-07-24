@@ -1,0 +1,11 @@
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (101, 2),
+(102, 3),
+(103, 4),
+(104, 5),
+(105, 6),
+(106, null),
+(107, null),
+(108, null),
+(109, null),
+(110, null);
