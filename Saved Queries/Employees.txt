@@ -1,0 +1,6 @@
+INSERT INTO Employees (FirstName, LastName, UserName, Password, EmployeeNumber, Email)
+VALUES ('Edward', 'Elric', 'Fullmetal', 'ed1234', 1, 'EdElric@gmail.com'),
+('Alphonse', 'Elric', 'ArmorSuit', 'al1234', 2, 'AlElric@gmail.com'),
+('Roy', 'Mustang', 'FlameGuy', 'roy1234', 3, 'RoyMustang@gmail.com'),
+('Yao', 'Ling', 'Heka', 'ling1234', 4, 'LingYao@gmail.com'),
+('Maes', 'Hughes', 'Major', 'maes1234', 5, 'MaesHughes@gmail.com');

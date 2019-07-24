@@ -1,0 +1,6 @@
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
+VALUES ('Carnivore', 'Meat', 2),
+('Omnivore', 'MeatVegetables', 2),
+('Herbivore', 'FruitsVegetables', 1),
+('CatDiet', 'CannedFood', 1),
+('DogDiet', 'DryFood', 2);
