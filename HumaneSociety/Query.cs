@@ -169,8 +169,15 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        // TODO: Animal CRUD Operations
-    internal static void AddAnimal(Animal animal)
+		public static void DisplayEmployeeRecord(Employee employee, string lastName)
+		{
+			var user = db.Employees.Where(e => e.LastName.Equals(lastName)).Select(e => e.UserName).FirstOrDefault();
+			Console.WriteLine(user);
+			Console.ReadLine();
+		}
+
+		// TODO: Animal CRUD Operations
+		internal static void AddAnimal(Animal animal)
     {
       db.Animals.InsertOnSubmit(animal);
       db.SubmitChanges();
