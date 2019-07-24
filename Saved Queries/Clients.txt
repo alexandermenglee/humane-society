@@ -1,0 +1,6 @@
+INSERT INTO Clients (FirstName, LastName, UserName, Password, AddressId, Email)
+VALUES ('Jon', 'Doe', 'JonDoe', 'jon1234', null, 'JonDoe@gmail.com'),
+('Jane', 'Doe', 'JaneDoe', 'jane1234', null, 'JaneDoe@gmail.com'),
+('Cruella', 'De''vil', 'SpottedCoat', 'cruella1234', null, 'CruellaDevil@gmail.com'),
+('Hades', 'Underworld', 'Death', 'hades666', null, 'HadesUnderworld@gmail.com'),
+('Zeus', 'Olympus', 'SkyThunder', 'zeus1234', null, 'ZeusOlympus@gmail.com');
