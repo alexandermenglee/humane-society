@@ -1,0 +1,6 @@
+INSERT INTO Shots (Name)
+VALUES ('RabiesShot'),
+('DistemperShot'),
+('HepatitisShot'),
+('ParainfluenzaShot'),
+('ParvoShot');
