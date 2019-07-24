@@ -161,17 +161,49 @@ namespace HumaneSociety
         }
 
 
-        //// TODO Items: ////
-        
-        // TODO: Allow any of the CRUD operations to occur here
-        internal static void RunEmployeeQueries(Employee employee, string crudOperation)
-        {
-            throw new NotImplementedException();
-        }
+		//// TODO Items: ////
 
+		// TODO: Allow any of the CRUD operations to occur here
+		internal static void RunEmployeeQueries(Employee employee, string crudOperation)
+		{
+			switch (crudOperation.ToLower())
+			{
+				case "create":
+					AddNewEmployee(employee);
+					break;
+				case "read":
+					ReadEmployeeInfo(employee);
+					break;
+				case "update":
+					//Call method to Update
+					break;
+				case "delete":
+					//Call method to Delete
+					break;
+				default:
+					break;
+			}
+		}
+
+		public static void AddNewEmployee(Employee employee)
+		{
+			db.Employees.InsertOnSubmit(employee);
+			db.SubmitChanges();
+		}
+
+		public static void ReadEmployeeInfo(Employee employee)
+		{
+			db.ObjectTrackingEnabled = false;
+			//Still need to write the syntax for this method
+		}
+
+		public static void DeleteEmployeeRecord(Employee employee)
+		{
+
+		}
 		public static void DisplayEmployeeRecord(Employee employee, string lastName)
 		{
-			var user = db.Employees.Where(e => e.LastName.Equals(lastName)).Select(e => e.UserName).FirstOrDefault();
+			var user = db.Employees.Where(e => e.LastName.Equals(lastName)).Select(e => e).FirstOrDefault();
 			Console.WriteLine(user);
 			Console.ReadLine();
 		}
