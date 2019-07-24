@@ -63,8 +63,14 @@ namespace HumaneSociety
     partial void InsertUSState(USState instance);
     partial void UpdateUSState(USState instance);
     partial void DeleteUSState(USState instance);
-    #endregion
-		
+		#endregion
+
+		public HumaneSocietyDataContext() :
+	   base(global::HumaneSociety.Properties.Settings.Default.HumaneSocietyConnectionString3, mappingSource)
+		{
+			OnCreated();
+		}
+
 		public HumaneSocietyDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
