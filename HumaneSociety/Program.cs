@@ -14,8 +14,13 @@ namespace HumaneSociety
 
 
 			Employee employee = new Employee();
+			//employee.EmployeeId = 6;
+			//Query.DeleteEmployeeRecord(employee);
+
 			//Query.AddNewEmployee();
 			//Console.ReadLine();
+			Admin admin = new Admin();
+			admin.LogIn();
 		}
     }
 }
