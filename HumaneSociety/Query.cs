@@ -500,6 +500,7 @@ namespace HumaneSociety
         {
           throw exception;
         }
+
       }
       else
       {
@@ -519,10 +520,10 @@ namespace HumaneSociety
       }
     }
 
-        internal static void RemoveAdoption(int animalId, int clientId)
-        {
-            throw new NotImplementedException();
-        }
+    internal static void RemoveAdoption(int animalId, int clientId)
+    {
+      throw new NotImplementedException();
+    }
 
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
