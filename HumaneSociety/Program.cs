@@ -6,21 +6,20 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-			//PointOfEntry.Run();
+      PointOfEntry.Run();
 
+      /*Employee employee = new Employee();*/
+      //employee.EmployeeId = 6;
+      //Query.DeleteEmployeeRecord(employee);
 
-			Employee employee = new Employee();
-			//employee.EmployeeId = 6;
-			//Query.DeleteEmployeeRecord(employee);
-
-			//Query.AddNewEmployee();
-			//Console.ReadLine();
-			Admin admin = new Admin();
-			admin.LogIn();
-		}
+      //Query.AddNewEmployee();
+      //Console.ReadLine();
+      /*Admin admin = new Admin();
+			admin.LogIn();*/
     }
+  }
 }
