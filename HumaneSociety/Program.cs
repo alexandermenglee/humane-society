@@ -10,7 +10,11 @@ namespace HumaneSociety
   {
     static void Main(string[] args)
     {
+<<<<<<< HEAD
       PointOfEntry.Run();
+=======
+			//PointOfEntry.Run();
+>>>>>>> e71a87e7ad3f41e9ed55e8201dd0597f80994318
 
       /*Employee employee = new Employee();*/
       //employee.EmployeeId = 6;
@@ -30,6 +34,8 @@ namespace HumaneSociety
       //employee.EmployeeId = 4;
       //Query.RunEmployeeQueries(employee, "delete");
 
+			UserEmployee employee = new UserEmployee();
+			employee.LogIn();
 
 
     }
