@@ -97,7 +97,7 @@ namespace HumaneSociety
         private void CheckAnimalStatus()
         {
             Console.Clear();
-            var updates = UserInterface.GetAnimalSearchCriteria();
+            var updates = UserInterface.GetAnimalSearchCriteria(); // returns a dictionary full of search parameters
             var animals = Query.SearchForAnimalsByMultipleTraits(updates).ToList();
             
             if(animals.Count > 1)
