@@ -440,10 +440,10 @@ namespace HumaneSociety
       return db.Categories.Where(c => categoryName.Equals(c.Name)).Select(c => c.CategoryId).Single();
     }
         
-        internal static Room GetRoom(int animalId)
-        {
-            throw new NotImplementedException();
-        }
+    internal static Room GetRoom(int animalId)
+    {
+      throw new NotImplementedException();
+    }
         
     internal static int GetDietPlanId(string dietPlanName)
     {
@@ -451,10 +451,31 @@ namespace HumaneSociety
     }
 
         // TODO: Adoption CRUD Operations
-        internal static void Adopt(Animal animal, Client client)
-        {
-            throw new NotImplementedException();
-        }
+    internal static void Adopt(Animal animal, Client client)
+    {
+      Adoption newAdoption = new Adoption()
+      {
+        ClientId = client.ClientId,
+        AnimalId = animal.AnimalId,
+        AdoptionFee = 75,
+        ApprovalStatus = "Pending"
+      };
+
+      //newAdoption.AnimalId = animal.AnimalId;
+      //newAdoption.ClientId = client.ClientId;
+      //newAdoption.AdoptionFee = 75;
+
+      db.Adoptions.InsertOnSubmit(newAdoption);
+
+      try
+      {
+        db.SubmitChanges();
+      }
+      catch(Exception exception)
+      {
+        throw exception;
+      }
+    }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
