@@ -19,8 +19,10 @@ namespace HumaneSociety
 
 			//Query.AddNewEmployee();
 			//Console.ReadLine();
-			Admin admin = new Admin();
-			admin.LogIn();
+			//Admin admin = new Admin();
+			//admin.LogIn();
+			UserEmployee userEmployee = new UserEmployee();
+			userEmployee.LogIn();
 		}
     }
 }
