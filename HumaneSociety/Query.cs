@@ -271,21 +271,71 @@ namespace HumaneSociety
       return animal;
     }
 
-        internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-            throw new NotImplementedException();
-        }
+    internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
+    {            
+      throw new NotImplementedException();
+    }
 
-        internal static void RemoveAnimal(Animal animal)
-        {
-            throw new NotImplementedException();
-        }
+    internal static void RemoveAnimal(Animal animal)
+    {
+      db.Animals.DeleteOnSubmit(animal);
+      db.SubmitChanges();
+    }
         
         // TODO: Animal Multi-Trait Search
-        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
+    internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
+    {
+      // IQueryable handles filter logic on server side
+        // Less network traffic
+      // IEnumerable handles filer logic on client side
+
+      // updates = {[1, "1"], [3, "57"], [4, "Aggressive"]}
+
+      /* Return results into IQueryable results 
+       * Then loop through IQueryable results to display all results that came back with multiple traits
+       */
+
+      IQueryable<Animal> results = db.Animals;
+
+      foreach (var item in updates)
+      {
+        switch (item.Key)
         {
-            throw new NotImplementedException();
+          case 1:
+            results = results.Where(a => a.CategoryId.Equals(item.Value));
+            break;
+          case 2:
+            results = results.Where(a => a.Name.Equals(item.Value));
+            break;
+          case 3:
+            results = results.Where(a => a.Age.Equals(item.Value));
+            break;
+          case 4:
+            results = results.Where(a => a.Demeanor.Equals(item.Value));
+            break;
+          case 5:
+            results = results.Where(a => a.KidFriendly.Equals(item.Value));
+            break;
+          case 6:
+            results = results.Where(a => a.PetFriendly.Equals(item.Value));
+            break;
+          case 7:
+            results = results.Where(a => a.Weight.Equals(item.Value));
+            break;
+          case 8:
+            results = results.Where(a => a.AnimalId.Equals(item.Value));
+            break;
         }
+      }
+
+      //testing
+      foreach (var item in results)
+      {
+        Console.WriteLine(item.AnimalId);
+      }
+
+      return results;
+    }
          
         // TODO: Misc Animal Things
     internal static int GetCategoryId(string categoryName)
