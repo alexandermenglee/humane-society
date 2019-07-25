@@ -442,7 +442,7 @@ namespace HumaneSociety
         
         internal static Room GetRoom(int animalId)
         {
-            throw new NotImplementedException();
+			return db.Rooms.Where(e => e.AnimalId == animalId).FirstOrDefault();
         }
         
     internal static int GetDietPlanId(string dietPlanName)
@@ -475,7 +475,7 @@ namespace HumaneSociety
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
 			IQueryable<AnimalShot> allShots = db.AnimalShots.Where(e => e.AnimalId == animal.AnimalId);
-			return allShots; //**STILL NEEDS TO BE TESTED!!!**
+			return allShots;
 		}
 
         internal static void UpdateShot(string shotName, Animal animal)
