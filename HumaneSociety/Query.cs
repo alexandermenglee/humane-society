@@ -492,7 +492,8 @@ namespace HumaneSociety
         adoption.ApprovalStatus = "Approved";
         adoptionStatus = animals.Where(a => a.AnimalId == adoption.AnimalId).Select(a => a.AdoptionStatus).Single();
         animal = animals.Where(a => a.AnimalId == adoption.AnimalId).Single();
-        animal.AdoptionStatus = adoptionStatus = "Adopted";
+        adoptionStatus = "Adopted";
+        animal.AdoptionStatus = adoptionStatus;
       }
       else
       {
@@ -512,10 +513,10 @@ namespace HumaneSociety
       }
     }
 
-        internal static void RemoveAdoption(int animalId, int clientId)
-        {
-            throw new NotImplementedException();
-        }
+    internal static void RemoveAdoption(int animalId, int clientId)
+    {
+      throw new NotImplementedException();
+    }
 
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
