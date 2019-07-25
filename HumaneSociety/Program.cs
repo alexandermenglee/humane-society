@@ -10,9 +10,17 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
+			//PointOfEntry.Run();
+
+
 			Employee employee = new Employee();
-			Query.DisplayEmployeeRecord(employee, "Elric");
-            PointOfEntry.Run();
-        }
+			//employee.EmployeeId = 6;
+			//Query.DeleteEmployeeRecord(employee);
+
+			//Query.AddNewEmployee();
+			//Console.ReadLine();
+			Admin admin = new Admin();
+			admin.LogIn();
+		}
     }
 }

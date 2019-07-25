@@ -161,17 +161,98 @@ namespace HumaneSociety
         }
 
 
-        //// TODO Items: ////
-        
-        // TODO: Allow any of the CRUD operations to occur here
-        internal static void RunEmployeeQueries(Employee employee, string crudOperation)
-        {
-            throw new NotImplementedException();
-        }
+		//// TODO Items: ////
 
+		// TODO: Allow any of the CRUD operations to occur here
+		internal static void RunEmployeeQueries(Employee employee, string crudOperation)
+		{
+			switch (crudOperation.ToLower())
+			{
+				case "create":
+					AddEmployeeRecord(employee);
+					break;
+				case "read":
+					ReadEmployeeRecord(employee);
+					break;
+				case "update":
+					UpdateEmployeeRecord(employee);
+					break;
+				case "delete":
+					DeleteEmployeeRecord(employee);
+					break;
+				default:
+					break;
+			}
+		}
+
+		public static void AddEmployeeRecord(Employee employee)
+		{
+			db.Employees.InsertOnSubmit(employee);
+
+			try
+			{
+				db.SubmitChanges();
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				db.SubmitChanges();
+			}
+			
+		}
+
+		public static void ReadEmployeeRecord(Employee employee)
+		{
+			db.ObjectTrackingEnabled = false;
+			Employee employeeRecord = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
+				Console.WriteLine(employeeRecord.EmployeeNumber + " " + employeeRecord.FirstName + " " + employeeRecord.LastName + " " + employeeRecord.UserName + " " + employeeRecord.Email);
+			Console.ReadLine();
+		}
+
+		public static void UpdateEmployeeRecord(Employee employee)
+		{
+			Employee foundEmployee = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber).FirstOrDefault();
+
+			if (foundEmployee == null)
+			{
+				Console.WriteLine("That employee number was not found, no record exists to be updated");
+				Console.ReadLine();
+			}
+
+			else
+			{
+				db.Employees.InsertOnSubmit(employee);
+			}
+
+			try
+			{
+				db.SubmitChanges();
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				db.SubmitChanges();
+			}
+		}
+
+		public static void DeleteEmployeeRecord(Employee employee)
+		{
+			var deleteEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
+			db.Employees.DeleteOnSubmit(deleteEmployee);
+			try
+			{
+				db.SubmitChanges();
+				Console.ReadLine();
+			}
+			catch (Exception e)
+			{
+
+				Console.WriteLine(e);
+			}
+		}
 		public static void DisplayEmployeeRecord(Employee employee, string lastName)
 		{
-			var user = db.Employees.Where(e => e.LastName.Equals(lastName)).Select(e => e.UserName).FirstOrDefault();
+			var user = db.Employees.Where(e => e.LastName.Equals(lastName)).Select(e => e).FirstOrDefault();
 			Console.WriteLine(user);
 			Console.ReadLine();
 		}
