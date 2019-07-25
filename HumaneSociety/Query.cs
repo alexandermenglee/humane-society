@@ -378,12 +378,35 @@ namespace HumaneSociety
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
 			IQueryable<AnimalShot> allShots = db.AnimalShots.Where(e => e.AnimalId == animal.AnimalId);
-			return allShots;
+			return allShots; //**STILL NEEDS TO BE TESTED!!!**
 		}
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            throw new NotImplementedException();
+			//First check that the shot being passed in is in the database
+			//Then add that shot to the AnimalShots table
+			//**If time permits, look to add the 'shot' if it doesn't exist already in the table
+			var foundShotId = Convert.ToInt32(db.Shots.Where(e => e.Name.Equals(shotName)).Select(e => e.ShotId));
+			AnimalShot newShot = new AnimalShot()
+			{
+				AnimalId = animal.AnimalId,
+				ShotId = foundShotId,
+				DateReceived = DateTime.Now
+			};
+
+			db.AnimalShots.InsertOnSubmit(newShot);
+
+			try
+			{
+				db.SubmitChanges();
+			}
+			catch (Exception e)
+			{
+
+				Console.WriteLine(e);
+				db.SubmitChanges();
+			}
+
         }
     }
 }
