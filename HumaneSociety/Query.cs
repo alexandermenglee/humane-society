@@ -506,6 +506,7 @@ namespace HumaneSociety
       {
         adoption.ApprovalStatus = "Denied";
         adoptionStatus = animals.Where(e => e.AnimalId == adoption.AnimalId).Select(s => s.AdoptionStatus).FirstOrDefault();
+		animal = animals.Where(a => a.AnimalId == adoption.AnimalId).Single();
         adoptionStatus =  "Not Adopted";
       }
 
@@ -522,7 +523,18 @@ namespace HumaneSociety
 
     internal static void RemoveAdoption(int animalId, int clientId)
     {
-      throw new NotImplementedException();
+			var deleteRecord = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).FirstOrDefault();
+			db.Adoptions.DeleteOnSubmit(deleteRecord);
+
+			try
+			{
+				db.SubmitChanges();
+			}
+			catch (Exception e)
+			{
+
+				throw e;
+			}
     }
 
         // TODO: Shots Stuff

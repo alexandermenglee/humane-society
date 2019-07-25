@@ -11,9 +11,7 @@ namespace HumaneSociety
     static void Main(string[] args)
     {
 
-      PointOfEntry.Run();
-
-			//PointOfEntry.Run();
+      //PointOfEntry.Run();
 
 
       /*Employee employee = new Employee();*/
@@ -34,8 +32,14 @@ namespace HumaneSociety
       //employee.EmployeeId = 4;
       //Query.RunEmployeeQueries(employee, "delete");
 
-			UserEmployee employee = new UserEmployee();
-			employee.LogIn();
+			//UserEmployee employee = new UserEmployee();
+			//employee.LogIn();
+
+			Animal animal = new Animal();
+			animal.AnimalId = 6;
+			Client client = new Client();
+			client.ClientId = 6;
+			Query.RemoveAdoption(6, 6);
 
 
     }
