@@ -297,7 +297,6 @@ namespace HumaneSociety
 
       IQueryable<Animal> results = db.Animals;
 
-      // depending on key (int) in dictionary, assign key strings to properties
       foreach (var item in updates)
       {
         switch (item.Key)
