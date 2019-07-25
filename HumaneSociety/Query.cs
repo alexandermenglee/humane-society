@@ -195,8 +195,7 @@ namespace HumaneSociety
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e);
-				db.SubmitChanges();
+				throw e;
 			}
 			
 		}
@@ -230,8 +229,7 @@ namespace HumaneSociety
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e);
-				db.SubmitChanges();
+				throw e;
 			}
 		}
 
@@ -255,7 +253,7 @@ namespace HumaneSociety
 			catch (Exception e)
 			{
 
-				Console.WriteLine(e);
+				throw e;
 			}
 		}
 		public static void DisplayEmployeeRecord(Employee employee, string lastName)
@@ -479,12 +477,13 @@ namespace HumaneSociety
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            throw new NotImplementedException();
+
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            throw new NotImplementedException();
+            //Check the bool and if it is true, change the approval status to Approved
+			//Then check the 
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
@@ -521,10 +520,7 @@ namespace HumaneSociety
 			}
 			catch (Exception e)
 			{
-
-				Console.WriteLine(e);
-				Console.WriteLine("This code did not work");
-				db.SubmitChanges();
+				throw e;
 			}
 
         }
