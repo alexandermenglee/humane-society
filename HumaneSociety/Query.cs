@@ -489,8 +489,16 @@ namespace HumaneSociety
       {
         adoption.ApprovalStatus = "Approved";
         adoptionStatus = animals.Where(a => a.AnimalId == adoption.AnimalId).Select(a => a.AdoptionStatus).Single();
-        animal = animals.Where(a => a.AnimalId == adoption.AnimalId).Single();
-        animal.AdoptionStatus = adoptionStatus = "Adopted";
+        adoptionStatus = "Adopted";
+
+        try
+        {
+          db.SubmitChanges();
+        }
+        catch(Exception exception)
+        {
+          throw exception;
+        }
       }
       else
       {
