@@ -317,7 +317,6 @@ namespace HumaneSociety
           case 6:
             // Needs testing
             bool thing = bool.Parse(item.Value);
-            animal.PetFriendly = thing;
             break;
           case 7:
             animal.Weight = int.Parse(item.Value);
@@ -477,15 +476,50 @@ namespace HumaneSociety
       }
     }
 
-        internal static IQueryable<Adoption> GetPendingAdoptions()
-        {
-            throw new NotImplementedException();
-        }
+    internal static IQueryable<Adoption> GetPendingAdoptions()
+    {
+      return db.Adoptions.Where(s => s.ApprovalStatus.Equals("pending"));
+    }
 
-        internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
+    internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
+    {
+      IQueryable<Animal> animals = db.Animals;
+      string adoptionStatus;
+      Animal animal;
+
+      if (isAdopted)
+      {
+        adoption.ApprovalStatus = "Approved";
+        adoptionStatus = animals.Where(a => a.AnimalId == adoption.AnimalId).Select(a => a.AdoptionStatus).Single();
+        animal = animals.Where(a => a.AnimalId == adoption.AnimalId).Select(a  => a.AdoptionStatus);
+        adoptionStatus = "Adopted";
+
+        try
         {
-            throw new NotImplementedException();
+          db.SubmitChanges();
         }
+        catch(Exception exception)
+        {
+          throw exception;
+        }
+      }
+      else
+      {
+        adoption.ApprovalStatus = "Denied";
+        adoptionStatus = animals.Where(e => e.AnimalId == adoption.AnimalId).Select(s => s.AdoptionStatus).FirstOrDefault();
+        adoptionStatus =  "Not Adopted";
+      }
+
+      try
+      {
+        db.SubmitChanges();
+      }
+      catch (Exception e)
+      {
+
+        throw e;
+      }
+    }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
