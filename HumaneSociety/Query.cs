@@ -261,7 +261,16 @@ namespace HumaneSociety
 		internal static void AddAnimal(Animal animal)
     {
       db.Animals.InsertOnSubmit(animal);
-      db.SubmitChanges();
+
+      try
+      {
+        db.SubmitChanges();
+      }
+      catch(Exception exception)
+      {
+        throw exception;
+      }
+
     }
 
     internal static Animal GetAnimalByID(int id)
@@ -299,7 +308,8 @@ namespace HumaneSociety
             break;
           case 6:
             // Needs testing
-            animal.PetFriendly = bool.Parse(item.Value);
+            bool thing = bool.Parse(item.Value);
+            animal.PetFriendly = thing;
             break;
           case 7:
             animal.Weight = int.Parse(item.Value);
@@ -320,8 +330,51 @@ namespace HumaneSociety
 
     internal static void RemoveAnimal(Animal animal)
     {
+      // All tables with AnimalId foreign key
+      /* Adoptions
+         AnimalShots
+         Rooms */
+      IQueryable<Adoption> adoptions = db.Adoptions;
+      IQueryable<AnimalShot> animalShots = db.AnimalShots;
+      IQueryable<Room> rooms = db.Rooms;
+
+      // Loop through adoptions and remove the adoption with the matching AnimalId
+      foreach(var adoption in adoptions)
+      {
+        if(adoption.AnimalId == animal.AnimalId)
+        {
+          db.Adoptions.DeleteOnSubmit(adoption);
+        }
+      }
+
+      // Loop through AnimalShots and remove the animalShot wit the matching AnimalId
+      foreach(var animalShot in animalShots)
+      {
+        if(animalShot.AnimalId == animal.AnimalId)
+        {
+          db.AnimalShots.DeleteOnSubmit(animalShot);
+        }
+      }
+
+      // Loop through Rooms and set the AnimalId to Null where the room's AnimaldId equals the animal's ID
+      foreach(var room in rooms)
+      {
+        if(room.AnimalId == animal.AnimalId)
+        {
+          room.AnimalId = null;
+        }
+      }
+
       db.Animals.DeleteOnSubmit(animal);
-      db.SubmitChanges();
+
+      try
+      {
+        db.SubmitChanges();
+      }
+      catch(Exception exception)
+      {
+        throw exception;
+      }
     }
         
         // TODO: Animal Multi-Trait Search
@@ -339,33 +392,33 @@ namespace HumaneSociety
 
       IQueryable<Animal> results = db.Animals;
 
-      foreach (var item in updates)
+      foreach (var update in updates)
       {
-        switch (item.Key)
+        switch (update.Key)
         {
           case 1:
-            results = results.Where(a => a.CategoryId.Equals(item.Value));
+            results = results.Where(a => a.CategoryId.Equals(update.Value));
             break;
           case 2:
-            results = results.Where(a => a.Name.Equals(item.Value));
+            results = results.Where(a => a.Name.Equals(update.Value));
             break;
           case 3:
-            results = results.Where(a => a.Age.Equals(item.Value));
+            results = results.Where(a => a.Age.Equals(update.Value));
             break;
           case 4:
-            results = results.Where(a => a.Demeanor.Equals(item.Value));
+            results = results.Where(a => a.Demeanor.Equals(update.Value));
             break;
           case 5:
-            results = results.Where(a => a.KidFriendly.Equals(item.Value));
+            results = results.Where(a => a.KidFriendly.Equals(update.Value));
             break;
           case 6:
-            results = results.Where(a => a.PetFriendly.Equals(item.Value));
+            results = results.Where(a => a.PetFriendly.Equals(update.Value));
             break;
           case 7:
-            results = results.Where(a => a.Weight.Equals(item.Value));
+            results = results.Where(a => a.Weight.Equals(update.Value));
             break;
           case 8:
-            results = results.Where(a => a.AnimalId.Equals(item.Value));
+            results = results.Where(a => a.AnimalId.Equals(update.Value));
             break;
         }
       }
