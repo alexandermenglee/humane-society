@@ -237,11 +237,19 @@ namespace HumaneSociety
 
 		public static void DeleteEmployeeRecord(Employee employee)
 		{
+			var animal = db.Animals.Where(a => a.EmployeeId == employee.EmployeeId).Select(x => x);
+			foreach (var item in animal)
+			{
+				item.EmployeeId = null;
+			}
+
 			var deleteEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
 			db.Employees.DeleteOnSubmit(deleteEmployee);
+
 			try
 			{
 				db.SubmitChanges();
+				Console.WriteLine("This code worked!");
 				Console.ReadLine();
 			}
 			catch (Exception e)
@@ -422,11 +430,11 @@ namespace HumaneSociety
 			//First check that the shot being passed in is in the database
 			//Then add that shot to the AnimalShots table
 			//**If time permits, look to add the 'shot' if it doesn't exist already in the table
-			var foundShotId = Convert.ToInt32(db.Shots.Where(e => e.Name.Equals(shotName)).Select(e => e.ShotId));
+			Shot foundShotId = db.Shots.Where(e => e.Name.Equals(shotName)).FirstOrDefault();
 			AnimalShot newShot = new AnimalShot()
 			{
 				AnimalId = animal.AnimalId,
-				ShotId = foundShotId,
+				ShotId = foundShotId.ShotId,
 				DateReceived = DateTime.Now
 			};
 
@@ -435,11 +443,13 @@ namespace HumaneSociety
 			try
 			{
 				db.SubmitChanges();
+				Console.WriteLine("This code worked!");
 			}
 			catch (Exception e)
 			{
 
 				Console.WriteLine(e);
+				Console.WriteLine("This code did not work");
 				db.SubmitChanges();
 			}
 

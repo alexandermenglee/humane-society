@@ -10,30 +10,28 @@ namespace HumaneSociety
   {
     static void Main(string[] args)
     {
-      PointOfEntry.Run();
+      //PointOfEntry.Run();
 
-      /*Employee employee = new Employee();*/
-      //employee.EmployeeId = 6;
-      //Query.DeleteEmployeeRecord(employee);
-
-<<<<<<< HEAD
-			Employee employee = new Employee();
+			/*Employee employee = new Employee();*/
 			//employee.EmployeeId = 6;
 			//Query.DeleteEmployeeRecord(employee);
 
 			//Query.AddNewEmployee();
 			//Console.ReadLine();
-			//Admin admin = new Admin();
-			//admin.LogIn();
-			UserEmployee userEmployee = new UserEmployee();
-			userEmployee.LogIn();
-		}
-=======
-      //Query.AddNewEmployee();
-      //Console.ReadLine();
-      /*Admin admin = new Admin();
-			admin.LogIn();*/
->>>>>>> 9b6aa9144684a8eced2555d1f803aac96437aa4c
-    }
+			/*Admin admin = new Admin();
+				  admin.LogIn();*/
+
+			//Animal animal = new Animal(); //Testing to see if UpdateShots works
+			//animal.AnimalId = 2;
+			//Query.UpdateShot("RabiesShot", animal);
+			//Console.ReadLine();
+
+			//Employee employee = new Employee(); //Testing to see if deleteEmployee method works properly
+			//employee.EmployeeId = 4;
+			//Query.RunEmployeeQueries(employee, "delete");
+
+
+
+	}
   }
 }
