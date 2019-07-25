@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-			//PointOfEntry.Run();
+      PointOfEntry.Run();
 
+      /*Employee employee = new Employee();*/
+      //employee.EmployeeId = 6;
+      //Query.DeleteEmployeeRecord(employee);
 
+<<<<<<< HEAD
 			Employee employee = new Employee();
 			//employee.EmployeeId = 6;
 			//Query.DeleteEmployeeRecord(employee);
@@ -24,5 +28,12 @@ namespace HumaneSociety
 			UserEmployee userEmployee = new UserEmployee();
 			userEmployee.LogIn();
 		}
+=======
+      //Query.AddNewEmployee();
+      //Console.ReadLine();
+      /*Admin admin = new Admin();
+			admin.LogIn();*/
+>>>>>>> 9b6aa9144684a8eced2555d1f803aac96437aa4c
     }
+  }
 }
