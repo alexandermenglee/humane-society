@@ -309,12 +309,10 @@ namespace HumaneSociety
             animal.Demeanor = item.Value;
             break;
           case 5:
-            // Needs testing
             animal.KidFriendly = bool.Parse(item.Value);
             break;
           case 6:
-            // Needs testing
-            bool thing = bool.Parse(item.Value);
+            animal.PetFriendly = bool.Parse(item.Value);
             break;
           case 7:
             animal.Weight = int.Parse(item.Value);
@@ -506,8 +504,9 @@ namespace HumaneSociety
       {
         adoption.ApprovalStatus = "Denied";
         adoptionStatus = animals.Where(e => e.AnimalId == adoption.AnimalId).Select(s => s.AdoptionStatus).FirstOrDefault();
-		animal = animals.Where(a => a.AnimalId == adoption.AnimalId).Single();
+        animal = animals.Where(a => a.AnimalId == adoption.AnimalId).Single();
         adoptionStatus =  "Not Adopted";
+        animal.AdoptionStatus = adoptionStatus;
       }
 
       try
