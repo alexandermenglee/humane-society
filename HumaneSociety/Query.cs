@@ -548,7 +548,6 @@ namespace HumaneSociety
         {
 			//First check that the shot being passed in is in the database
 			//Then add that shot to the AnimalShots table
-			//**If time permits, look to add the 'shot' if it doesn't exist already in the table
 			Shot foundShotId = db.Shots.Where(e => e.Name.Equals(shotName)).FirstOrDefault();
 			AnimalShot newShot = new AnimalShot()
 			{

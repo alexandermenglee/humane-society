@@ -35,11 +35,11 @@ namespace HumaneSociety
 			//UserEmployee employee = new UserEmployee();
 			//employee.LogIn();
 
-			Animal animal = new Animal();
-			animal.AnimalId = 6;
-			Client client = new Client();
-			client.ClientId = 6;
-			Query.RemoveAdoption(6, 6);
+			//Animal animal = new Animal();
+			//animal.AnimalId = 6;
+			//Client client = new Client();
+			//client.ClientId = 6;
+			//Query.RemoveAdoption(6, 6);
 
 
     }
