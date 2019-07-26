@@ -195,8 +195,7 @@ namespace HumaneSociety
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e);
-				db.SubmitChanges();
+				throw e;
 			}
 			
 		}
@@ -230,8 +229,7 @@ namespace HumaneSociety
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e);
-				db.SubmitChanges();
+				throw e;
 			}
 		}
 
@@ -255,7 +253,7 @@ namespace HumaneSociety
 			catch (Exception e)
 			{
 
-				Console.WriteLine(e);
+				throw e;
 			}
 		}
 		public static void DisplayEmployeeRecord(Employee employee, string lastName)
@@ -491,7 +489,16 @@ namespace HumaneSociety
         adoptionStatus = animals.Where(a => a.AnimalId == adoption.AnimalId).Select(a => a.AdoptionStatus).Single();
         animal = animals.Where(a => a.AnimalId == adoption.AnimalId).Single();
         adoptionStatus = "Adopted";
-        animal.AdoptionStatus = adoptionStatus;
+
+        try
+        {
+          db.SubmitChanges();
+        }
+        catch(Exception exception)
+        {
+          throw exception;
+        }
+
       }
       else
       {
@@ -515,7 +522,18 @@ namespace HumaneSociety
 
     internal static void RemoveAdoption(int animalId, int clientId)
     {
-      
+			var deleteRecord = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).FirstOrDefault();
+			db.Adoptions.DeleteOnSubmit(deleteRecord);
+
+			try
+			{
+				db.SubmitChanges();
+			}
+			catch (Exception e)
+			{
+
+				throw e;
+			}
     }
 
         // TODO: Shots Stuff
@@ -547,10 +565,7 @@ namespace HumaneSociety
 			}
 			catch (Exception e)
 			{
-
-				Console.WriteLine(e);
-				Console.WriteLine("This code did not work");
-				db.SubmitChanges();
+				throw e;
 			}
 
         }
